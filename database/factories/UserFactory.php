@@ -10,6 +10,10 @@ use Illuminate\Support\Str;
  */
 class UserFactory extends Factory
 {
+    public const DEFAULT_USER_NAME = 'Administrator';
+
+    public const DEFAULT_USER_EMAIL = 'admin@laravel.com';
+
     /**
      * Define the model's default state.
      *
@@ -34,5 +38,20 @@ class UserFactory extends Factory
         return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
         ]);
+    }
+
+    /**
+     * Indicate that the model's for default admin.
+     *
+     * @return static
+     */
+    public function default()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'name' => self::DEFAULT_USER_NAME,
+                'email' => self::DEFAULT_USER_EMAIL,
+            ];
+        });
     }
 }
